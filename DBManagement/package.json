@@ -1,0 +1,13 @@
+{
+  "name": "wdn",
+  "version": "1.0.0",
+  "description": "Watermeleon Development Network",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "~2.0"
+  }, "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
