@@ -3,7 +3,6 @@ var db;
 client.connect(function (err, mongoClient) {
     if (err) console.log(err);
     db = mongoClient.db("wdn");
-    console.log('connected');
 });
 
 exports.userExists = function (userName, callback) {
@@ -20,12 +19,11 @@ exports.userExists = function (userName, callback) {
         });
     });
 };
-exports.insert = function (req, res) {
+exports.insert = function (employer, callback) {
     db.collection('User', { strict: true }, function (err, collection) {
         if (err) console.log(err);
-        collection.insert(req.body, { safe: true }, function (err, result) {
-            console.log(req.body);
-            res.send(req.body);
+        collection.insert(employer, { safe: true }, function (err, result) {
+            callback(employer);
         });
     });
 };

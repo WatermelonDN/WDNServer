@@ -10,6 +10,9 @@ var EmployerManagement = {
                 res.jsonp({ result: true });
             }
         });
+    },
+    insert: function (req, res) {
+        employerInformation.insert(req.body, res.send);        
     }
 };
 

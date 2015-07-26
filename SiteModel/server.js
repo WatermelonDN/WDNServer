@@ -1,6 +1,6 @@
 var express = require('express'),
-employerInformation = require('../DBManagement/EmployerInformation'),
-employerManagement = require('./EmployerManagement');
+employerManagement = require('./EmployerManagement'),
+siteModelFacade = require('./SiteModelFacade');
 cors = require('cors'),
 bodyParser = require('body-parser');
 
@@ -11,8 +11,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.get('/SecurityFacade/:userName/userExists', employerManagement.userExists);
-app.post('/SecurityFacade/insertUser', employerInformation.insert);
+app.use(express.static(__dirname + '/models'));
+
+app.get('/Security/:userName/userExists', employerManagement.userExists);
+app.post('/Security/insertUser', employerManagement.insert);
+
+app.get('/Project/newId', siteModelFacade.newId);
+app.post('/Project/insert', siteModelFacade.insertProject);
+
 
 app.listen(3000);
 
