@@ -18,6 +18,7 @@ var LoginController = {
         });
     },
     checkUser: function (req, res) {
+        req.body.userName = req.body.userName.toLowerCase();
         loginInformation.checkUser(req.body, function (user) {
             res.jsonp(user);
         });

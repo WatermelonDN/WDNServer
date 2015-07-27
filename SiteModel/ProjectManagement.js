@@ -7,7 +7,7 @@ var ProjectManagement = {
         });
     },
     insert: function (req, res) {
-        this.newId(function (id) {
+        module.exports.newId(function (id) {
             req.body.projectID = id;
             req.body.status = 'New';
             projectInformation.insert(req.body, function (project) {
