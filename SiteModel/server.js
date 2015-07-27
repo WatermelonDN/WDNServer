@@ -1,5 +1,5 @@
 var express = require('express'),
-employerManagement = require('./EmployerManagement'),
+securityFacade = require('../Security/SecurityFacade'),
 siteModelFacade = require('./SiteModelFacade');
 cors = require('cors'),
 bodyParser = require('body-parser');
@@ -13,10 +13,11 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/models'));
 
-app.get('/Security/:userName/userExists', employerManagement.userExists);
-app.post('/Security/insertUser', employerManagement.insert);
+app.get('/Security/:userName/userExists', securityFacade.userExists);
+app.get('/Security/user/:userID', securityFacade.getUser);
+app.post('/Security/insertUser', securityFacade.insert);
 
-app.get('/Project/newId', siteModelFacade.newId);
+app.get('/Project/All', siteModelFacade.getAllProjects);
 app.post('/Project/insert', siteModelFacade.insertProject);
 
 

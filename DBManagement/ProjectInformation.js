@@ -22,3 +22,12 @@ exports.insert = function (project, callback) {
         });
     });
 };
+
+exports.getAllProjects = function (callback) {
+    db.collection('Project', { strict: true }, function (err, collection) {
+        if (err) console.log(err);
+        collection.find().toArray(function (err, items) {
+            callback(items);
+        });
+    });
+};

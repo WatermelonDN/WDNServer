@@ -1,15 +1,23 @@
 projectInformation = require('../DBManagement/ProjectInformation');
 
 var ProjectManagement = {
-    newId: function (req, res) {
+    newId: function (callback) {
         projectInformation.count(function (count) {
-            res.jsonp({ newId: count + 1 });
+            callback(count + 1);
         });
     },
     insert: function (req, res) {
-        req.body.status = 'New';
-        projectInformation.insert(req.body, function (project) {
-            res.send(project);
+        this.newId(function (id) {
+            req.body.projectID = id;
+            req.body.status = 'New';
+            projectInformation.insert(req.body, function (project) {
+                res.send(project);
+            });
+        });
+    },
+    getAllProjects: function (req, res) {
+        projectInformation.getAllProjects(function (projects) {
+            res.send(projects);
         });
     }
 };

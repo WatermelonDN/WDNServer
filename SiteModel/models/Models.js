@@ -1,6 +1,7 @@
 ﻿var SiteModel = null;
 (function () {
     var User = function () {
+        this.userID = 0;
         this.userName = '';
         this.type = '';
         this.email = '';
