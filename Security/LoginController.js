@@ -17,6 +17,11 @@ var LoginController = {
             }
         });
     },
+    checkUser: function (req, res) {
+        loginInformation.checkUser(req.body, function (user) {
+            res.jsonp(user);
+        });
+    },
     getUser: function (req, res) {
         loginInformation.getUser(parseInt(req.params.userID), function(user){
             res.jsonp(user);

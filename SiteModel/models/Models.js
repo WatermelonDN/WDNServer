@@ -1,4 +1,11 @@
 ﻿var SiteModel = null;
+var Security = {
+    Login: function () {
+        this.userID = 0;
+        this.userName = '';
+        this.password = '';
+    }
+};
 (function () {
     var User = function () {
         this.userID = 0;

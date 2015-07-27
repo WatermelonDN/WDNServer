@@ -12,9 +12,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/models'));
+app.use(express.static('../Security/models'));
 
 app.get('/Security/:userName/userExists', securityFacade.userExists);
 app.get('/Security/user/:userID', securityFacade.getUser);
+app.post('/Security/checkUser', securityFacade.checkUser);
 app.post('/Security/insertUser', securityFacade.insert);
 
 app.get('/Project/All', siteModelFacade.getAllProjects);

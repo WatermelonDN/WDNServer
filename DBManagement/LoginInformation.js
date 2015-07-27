@@ -28,6 +28,13 @@ var LoginInformation = {
             });
         });
     },
+    checkUser: function (login, callback) {
+        db.collection('User', { strict: true }, function (err, collection) {
+            collection.findOne({ userName: login.userName, password: login.password }, { userID: 1, userName: 1, _id: 0 }, function (err, result) {
+                callback(result);
+            });
+        });
+    },
     getUser: function (userID, callback) {
         db.collection('User', { strict: true }, function (err, collection) {
             collection.findOne({ userID: userID }, { userID: 1, userName: 1, _id: 0 }, function (err, result) {
