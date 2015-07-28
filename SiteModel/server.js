@@ -21,6 +21,7 @@ app.post('/Security/insertUser', securityFacade.insert);
 
 app.get('/Project/All', siteModelFacade.getAllProjects);
 app.post('/Project/insert', siteModelFacade.insertProject);
+app.post('/Project/:projectID/Interested', siteModelFacade.showInterest);
 
 
 app.listen(3000);

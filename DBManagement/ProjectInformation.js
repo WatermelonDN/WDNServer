@@ -5,29 +5,53 @@ client.connect(function (err, mongoClient) {
     db = mongoClient.db("wdn");
 });
 
-exports.count = function (callback) {
+var getCollection = function (collectionCallback) {
     db.collection('Project', { strict: true }, function (err, collection) {
         if (err) console.log(err);
-        collection.count(function (err, result) {
-            callback(result);
-        });
+        collectionCallback(collection);
     });
 };
 
-exports.insert = function (project, callback) {
-    db.collection('Project', { strict: true }, function (err, collection) {
-        if (err) console.log(err);
-        collection.insert(project, { safe: true }, function (err, result) {
-            callback(project);
+var ProjectInformation = {
+    count: function (callback) {
+        db.collection('Project', { strict: true }, function (err, collection) {
+            if (err) console.log(err);
+            collection.count(function (err, result) {
+                callback(result);
+            });
         });
-    });
+    },
+    insert: function (project, callback) {
+        db.collection('Project', { strict: true }, function (err, collection) {
+            if (err) console.log(err);
+            collection.insert(project, { safe: true }, function (err, result) {
+                callback(project);
+            });
+        });
+    },
+    getAllProjects: function (callback) {
+        getCollection(function (collection) {
+            collection.find().toArray(function (err, items) {
+                callback(items);
+            });
+        });
+    },
+    developersInterested: function (projectID, callback) {
+        db.collection('Project', { strict: true }, function (err, collection) {
+            if (err) console.log(err);
+            collection.findOne({ projectID: projectID }, { developersInterested: 1 }, function (err, result) {
+                callback(result);
+            });
+        });
+    },
+    showInterest: function (projectID, developerIDs, callback) {
+        db.collection('Project', { strict: true }, function (err, collection) {
+            if (err) console.log(err);
+            collection.update({ projectID: projectID }, { $set: { developersInterested: developerIDs } }, function (err, result) {
+                callback(result);
+            });
+        });
+    }
 };
 
-exports.getAllProjects = function (callback) {
-    db.collection('Project', { strict: true }, function (err, collection) {
-        if (err) console.log(err);
-        collection.find().toArray(function (err, items) {
-            callback(items);
-        });
-    });
-};
+module.exports = ProjectInformation;
