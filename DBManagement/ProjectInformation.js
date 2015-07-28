@@ -44,6 +44,13 @@ var ProjectInformation = {
             });
         });
     },
+    getProject: function (projectID, callback) {
+        getCollection(function (collection) {
+            collection.findOne({ projectID: projectID }, function (err, result) {
+                callback(result);
+            });
+        });
+    },
     showInterest: function (projectID, developerIDs, callback) {
         db.collection('Project', { strict: true }, function (err, collection) {
             if (err) console.log(err);

@@ -22,7 +22,8 @@ var Security = {
     }
     Employer.prototype = Object.create(User.prototype);
     var Developer = function () {
-
+        this.team = 0;
+        this.leader = false;
     };
     Developer.prototype = Object.create(User.prototype);
     SiteModel = {

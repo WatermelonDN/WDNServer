@@ -20,6 +20,12 @@ var ProjectManagement = {
             res.send(projects);
         });
     },
+    getProject: function (req, res) {
+        var projectID = parseInt(req.params.projectID);
+        projectInformation.getProject(projectID, function (project) {
+            res.jsonp(project);
+        });
+    },
     showInterest: function (req, res) {
         var projectID = parseInt(req.params.projectID);
         projectInformation.developersInterested(projectID, function (project) {

@@ -20,8 +20,11 @@ app.post('/Security/checkUser', securityFacade.checkUser);
 app.post('/Security/insertUser', securityFacade.insert);
 
 app.get('/Project/All', siteModelFacade.getAllProjects);
+app.get('/Project/:projectID/Details', siteModelFacade.getProject);
 app.post('/Project/insert', siteModelFacade.insertProject);
 app.post('/Project/:projectID/Interested', siteModelFacade.showInterest);
+
+app.get('/Developer/:userID/Details', siteModelFacade.getDeveloper);
 
 
 app.listen(3000);
